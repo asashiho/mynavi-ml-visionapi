@@ -17,7 +17,6 @@ $(function () {
 function uploadFiles (event) {
   event.preventDefault(); // Prevent the default form post
 
-  // Grab the file and asynchronously convert to base64.
   var file = $('#fileform [name=imagefile]')[0].files[0];
   var reader = new FileReader();
 
@@ -39,9 +38,13 @@ function sendFileToCloudVision (event) {
       features: [{
         type: 'TEXT_DETECTION',
         maxResults: 200
-      }]
+      }],
+      imageContext:{
+        languageHints:["ja","en","zh","ko"]
+      }
     }]
   };
+
 
   // POST処理
   $.post({
